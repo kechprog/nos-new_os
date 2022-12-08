@@ -11,36 +11,19 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 
 local TERMINAL = "kitty"
 local MODKEY = "Mod1"
-local EDITOR_CMD = TERMINAL .. " -e " .. "~/.local/bin/lvim"
 
-myawesomemenu = {
-  { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-  { "manual", TERMINAL .. " -e man awesome" },
-  { "edit config", EDITOR_CMD .. " " .. awesome.conffile },
-  { "restart", awesome.restart },
-  { "quit", function() awesome.quit() end },
-}
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-  { "open terminal", TERMINAL }
-}
+-- launcher widget
+mylauncher = awful.widget.launcher({
+  image = beautiful.awesome_icon,
+  menu = awful.menu({ items = {
+    { "open terminal", TERMINAL },
+    { "restart", awesome.restart },
+    { "quit", function() awesome.quit() end },
+  } })
 })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-  menu = mymainmenu })
 
--- Menubar configuration
-menubar.utils.terminal = TERMINAL -- Set the terminal for applications that require it
--- }}}
-
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
-
--- {{{ Wibar
--- Create a textclock widget
-mytextclock = wibox.widget.textclock()
-
--- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
   awful.button({}, 1, function(t) t:view_only() end),
   awful.button({ MODKEY }, 1, function(t)
@@ -85,49 +68,54 @@ local tasklist_buttons = gears.table.join(
 
 awful.screen.connect_for_each_screen(function(s)
   -- Each screen has its own tag table.
-  awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+  awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
 
-  -- Create a promptbox for each screen
-  s.mypromptbox = awful.widget.prompt()
-  -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-  -- We need one layoutbox per screen.
-  s.mylayoutbox = awful.widget.layoutbox(s)
-  s.mylayoutbox:buttons(gears.table.join(
-    awful.button({}, 1, function() awful.layout.inc(1) end),
-    awful.button({}, 3, function() awful.layout.inc(-1) end),
-    awful.button({}, 4, function() awful.layout.inc(1) end),
-    awful.button({}, 5, function() awful.layout.inc(-1) end)))
-  -- Create a taglist widget
+
+
+  -- widget with all tags
   s.mytaglist = awful.widget.taglist {
     screen  = s,
     filter  = awful.widget.taglist.filter.all,
     buttons = taglist_buttons
   }
 
-  -- Create a tasklist widget
+  -- widget with all application running
   s.mytasklist = awful.widget.tasklist {
     screen  = s,
     filter  = awful.widget.tasklist.filter.currenttags,
     buttons = tasklist_buttons
   }
 
-  -- Create the wibox
-  s.mywibox = awful.wibar({ position = "top", screen = s })
+  -- clock widget
+  local mytextclock = wibox.widget.textclock()
 
-  -- Add widgets to the wibox
+  -- layout widget
+  s.mylayoutbox = awful.widget.layoutbox(s)
+  s.mylayoutbox:buttons(gears.table.join(
+    awful.button({}, 1, function() awful.layout.inc(1) end ),
+    awful.button({}, 3, function() awful.layout.inc(-1) end),
+    awful.button({}, 4, function() awful.layout.inc(1) end ),
+    awful.button({}, 5, function() awful.layout.inc(-1) end)
+  ))
+
+  -- Create an actual bar
+  s.mywibox = awful.wibar({ position = "bottom", screen = s })
   s.mywibox:setup {
     layout = wibox.layout.align.horizontal,
+
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
+
       mylauncher,
       s.mytaglist,
-      s.mypromptbox,
     },
+
     s.mytasklist, -- Middle widget
+
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      mykeyboardlayout,
-      wibox.widget.systray(),
+
+      -- wibox.widget.systray -- god knows what is it.
       mytextclock,
       s.mylayoutbox,
     },

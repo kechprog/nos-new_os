@@ -30,29 +30,45 @@ client.connect_signal("request::titlebars", function(c)
     end)
   )
 
-  awful.titlebar(c):setup {
-    { -- Left
-      awful.titlebar.widget.iconwidget(c),
-      buttons = buttons,
-      layout  = wibox.layout.fixed.horizontal
-    },
-    { -- Middle
-      { -- Title
-        align  = "center",
-        widget = awful.titlebar.widget.titlewidget(c)
-      },
-      buttons = buttons,
-      layout  = wibox.layout.flex.horizontal
-    },
-    { -- Right
-      awful.titlebar.widget.floatingbutton(c),
-      awful.titlebar.widget.maximizedbutton(c),
-      awful.titlebar.widget.stickybutton(c),
-      awful.titlebar.widget.ontopbutton(c),
+  local padding = 0
+  local separator = wibox.widget.textbox("  ")
+  separator.force_height = 0
+
+  awful.titlebar(c, {
+    position = "left",
+    size     = 22,
+  }):setup {
+    { -- TOP
+      separator,
       awful.titlebar.widget.closebutton(c),
-      layout = wibox.layout.fixed.horizontal()
+      separator,
+      awful.titlebar.widget.minimizebutton(c),
+      separator,
+      awful.titlebar.widget.maximizedbutton(c),
+      separator,
+      align = "top",
+      -- buttons = buttons,
+      layout  = wibox.layout.fixed.vertical,
+      spacing = padding,
     },
-    layout = wibox.layout.align.horizontal
+
+    { -- MIDDLE
+      buttons = buttons,
+      align = "center",
+      layout  = wibox.layout.flex.vertical
+    },
+
+    { -- BOTTOM
+      separator,
+      awful.titlebar.widget.stickybutton(c),
+      separator,
+      align = "bottom",
+      layout = wibox.layout.fixed.vertical(),
+      spacing = padding,
+    },
+
+    -- GLOBAL
+    layout = wibox.layout.align.vertical
   }
 
   if awful.layout.get() == awful.layout.suit.tile then

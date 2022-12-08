@@ -47,12 +47,12 @@ local GLOBALKEYS = gears.table.join(
 
   awful.key({ MODKEY, }, "t", function()
     awful.layout.inc(1)
-    local screen_num = mouse.screenitrogen --restoren
+    local screen_num = mouse.screen
     for _, c in ipairs(client.get(screen_num)) do
       if awful.layout.get() == awful.layout.suit.tile then
-        awful.titlebar.hide(c)
+        awful.titlebar.hide(c, "left") -- god knows why it can't infer position
       else
-        awful.titlebar.show(c)
+        awful.titlebar.show(c, "left")
       end
     end
   end,
