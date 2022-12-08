@@ -34,7 +34,7 @@ awful.layout.layouts = {
 }
 
 awful.spawn.with_shell("picom --experimental-backends")
--- awful.spawn.with_shell("~/.config/awesome/mk_touchpad.sh")
+awful.spawn.with_shell("~/.config/awesome/mk_touchpad.sh")
 
 require 'theme'
 require 'screens'
