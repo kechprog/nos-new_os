@@ -33,8 +33,9 @@ awful.layout.layouts = {
   awful.layout.suit.tile,
 }
 
-awful.spawn.with_shell("picom --experimental-backends")
-awful.spawn.with_shell("~/.config/awesome/mk_touchpad.sh")
+awful.spawn.with_shell("picom --experimental-backends --dbus"   )
+awful.spawn.with_shell("~/.config/awesome/mk_touchpad.sh"       )
+awful.spawn.with_shell("libinput-gestures-setup autostart start")
 
 require 'theme'
 require 'screens'

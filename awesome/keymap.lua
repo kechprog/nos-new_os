@@ -10,7 +10,8 @@ local BROWSER = "firefox"
 local function focus(direction)
   return function()
     awful.client.focus.bydirection(direction)
-    local c = client.focus
+    local c = client.focus  
+    c:raise()
     if mouse.object_under_pointer() ~= c then
       local geometry = c:geometry()
       local x = geometry.x + geometry.width / 2
@@ -24,11 +25,12 @@ local GLOBALKEYS = gears.table.join(
   awful.key({ MODKEY, }, "s", hotkeys_popup.show_help,
     { description = "show help", group = "awesome" }),
 
-  awful.key({ MODKEY, }, "Left", awful.tag.viewprev,
-    { description = "view previous", group = "tag" }),
+    -- TODO REMAP TO TRACKPAD GESTURES
+  -- awful.key({ MODKEY, }, "Left", awful.tag.viewprev,
+  --   { description = "view previous", group = "tag" }),
 
-  awful.key({ MODKEY, }, "Right", awful.tag.viewnext,
-    { description = "view next", group = "tag" }),
+  -- awful.key({ MODKEY, }, "Right", awful.tag.viewnext,
+  --   { description = "view next", group = "tag" }),
 
   awful.key({ MODKEY, }, "Escape", awful.tag.history.restore,
     { description = "go back", group = "tag" }),
