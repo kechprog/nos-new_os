@@ -2,7 +2,7 @@ font:
   # Normal (roman) font face
   normal:
     family: Caskaydia Cove Nerd Font
-  size: 8
+  size: 16
 
 window:
   decorations: full

@@ -1,0 +1,3 @@
+stylesheet=style.css
+no_actions=true # remove annoying arrows down
+allow_images=true

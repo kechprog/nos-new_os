@@ -1,0 +1,31 @@
+max-visible=5
+max-history=5
+sort=-time
+layer=top
+max-icon-size=128
+icon-path=/usr/share/icons/Adwaita
+default-timeout=1000
+ignore-timeout=0
+icons=1
+group-by=none
+invisible=0
+
+###       LOOKS       ###
+#anchor=center
+font=Caskaydia Cove Nerd Font 30
+background-color=#1e2030
+text-color=#b7bdf8
+
+width=170
+height=130
+
+margin=10
+padding=20
+
+border-size=3
+border-color=#f5bde6
+border-radius=7
+
+markup=1
+format=<b>%s</b>
+text-alignment=center

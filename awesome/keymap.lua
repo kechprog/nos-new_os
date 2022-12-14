@@ -2,6 +2,7 @@ local gears = require("gears")
 local awful = require("awful")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local switcher = require("awesome-switcher")
 
 local TERMINAL = "kitty"
 local MODKEY = "Mod1"
@@ -10,7 +11,7 @@ local BROWSER = "firefox"
 local function focus(direction)
   return function()
     awful.client.focus.bydirection(direction)
-    local c = client.focus  
+    local c = client.focus
     c:raise()
     if mouse.object_under_pointer() ~= c then
       local geometry = c:geometry()
@@ -25,7 +26,18 @@ local GLOBALKEYS = gears.table.join(
   awful.key({ MODKEY, }, "s", hotkeys_popup.show_help,
     { description = "show help", group = "awesome" }),
 
-    -- TODO REMAP TO TRACKPAD GESTURES
+  awful.key({ MODKEY, }, "Tab", function()
+    switcher.switch(1, "Mod1", "Alt_L", "Shift", "Tab")
+  end,
+    { description = "alt tab", group = "awesome" }),
+
+  awful.key({ MODKEY, "Shift"}, "Tab", function()
+    switcher.switch(-1, "Mod1", "Alt_L", "Shift", "Tab")
+  end,
+    { description = "alt tab", group = "awesome" }),
+
+
+  -- TODO REMAP TO TRACKPAD GESTURES
   -- awful.key({ MODKEY, }, "Left", awful.tag.viewprev,
   --   { description = "view previous", group = "tag" }),
 
@@ -80,7 +92,7 @@ local GLOBALKEYS = gears.table.join(
     { description = "select previous", group = "layout" }),
 
   -- Prompt
-  awful.key({ MODKEY }, "space", function() awful.spawn.with_shell("rofi -show drun")  end,
+  awful.key({ MODKEY }, "space", function() awful.spawn.with_shell("rofi -show drun") end,
     { description = "run prompt", group = "launcher" }),
 
   -- Menubar
