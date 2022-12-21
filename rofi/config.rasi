@@ -35,8 +35,8 @@
 	Mantle: 	#1e2030;
 	Crust: 	    #181926;
 
-    width: 850;
-    height: 350;
+    width: 500;
+    height: 311;
     font: "Caskaydia Cove Nerd Font 16";
 	text-color:					 @Text;
 }
@@ -96,7 +96,7 @@ inputbar {
 	margin:                      9px 9px 5px 9px;                  
     padding:                     4px;
     border:                      2px solid;
-    border-radius:               3px;
+    border-radius:               7px;
     border-color:                @Blue;
     background-color:            transparent;
     text-color:                  @Text;
@@ -119,4 +119,14 @@ entry {
     placeholder:                 "search...";
     placeholder-color:           inherit;
     align:                       center;
+}
+
+/******************************/
+/*****----- Listview -----*****/
+/******************************/
+element, element-text, element-icon {
+    border:           0px solid;
+    padding:          4px; 
+    background-color: @Base;
+    text-color:       @Text;
 }

@@ -11,12 +11,14 @@ local beautiful = require("beautiful")
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 
+local assets_path = "/home/ed/.config/awesome/assets/"
+
 local theme = {}
 
 theme.font = "sans 8"
 
-theme.bg_normal   = "#363a4f"
-theme.bg_focus    = "#363a4f"
+theme.bg_normal   = "#181926"
+theme.bg_focus    = "#181926"
 theme.bg_urgent   = "#ee99a0"
 theme.bg_minimize = "#ee99a0"
 theme.bg_systray  = theme.bg_normal
@@ -31,6 +33,8 @@ theme.border_width  = 3
 theme.border_normal = "#363a4f"
 theme.border_focus  = "#b7bdf8"
 theme.border_marked = "#8aadf4"
+
+theme.maximized_hide_border = false;
 
 -- There are other variable sets
 -- overriding the default one when
@@ -73,33 +77,35 @@ theme.menu_width        = dpi(100)
 --theme.bg_widget = "#cc0000"
 
 -- Define the image to load
-theme.titlebar_close_button_normal = themes_path .. "default/titlebar/close_normal.png"
-theme.titlebar_close_button_focus  = themes_path .. "default/titlebar/close_focus.png"
+-- theme.titlebar_close_button_normal = themes_path .. "default/titlebar/close_normal.png"
+-- theme.titlebar_close_button_focus  = themes_path .. "default/titlebar/close_focus.png"
+theme.titlebar_close_button_normal       = assets_path .. "close.svg"
+theme.titlebar_close_button_focus        = assets_path .. "close.svg"
+theme.titlebar_close_button_normal_hover = assets_path .. "close_selected.svg"
+theme.titlebar_close_button_focus_hover  = assets_path .. "close_selected.svg"
 
-theme.titlebar_minimize_button_normal = themes_path .. "default/titlebar/minimize_normal.png"
-theme.titlebar_minimize_button_focus  = themes_path .. "default/titlebar/minimize_focus.png"
+theme.titlebar_minimize_button_normal = assets_path .. "hide.svg"
+theme.titlebar_minimize_button_focus  = assets_path .. "hide.svg"
 
-theme.titlebar_ontop_button_normal_inactive = themes_path .. "default/titlebar/ontop_normal_inactive.png"
-theme.titlebar_ontop_button_focus_inactive  = themes_path .. "default/titlebar/ontop_focus_inactive.png"
-theme.titlebar_ontop_button_normal_active   = themes_path .. "default/titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_active    = themes_path .. "default/titlebar/ontop_focus_active.png"
+theme.titlebar_sticky_button_normal_inactive = assets_path .. "pin.svg"
+theme.titlebar_sticky_button_focus_inactive  = assets_path .. "pin.svg"
+theme.titlebar_sticky_button_normal_active   = assets_path .. "pin_active.png"
+theme.titlebar_sticky_button_focus_active    = assets_path .. "pin_active.png"
 
-theme.titlebar_sticky_button_normal_inactive = themes_path .. "default/titlebar/sticky_normal_inactive.png"
-theme.titlebar_sticky_button_focus_inactive  = themes_path .. "default/titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_active   = themes_path .. "default/titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_active    = themes_path .. "default/titlebar/sticky_focus_active.png"
+theme.titlebar_maximized_button_normal_inactive = assets_path .. "maximaze.svg"
+theme.titlebar_maximized_button_focus_inactive  = assets_path .. "maximaze.svg"
+theme.titlebar_maximized_button_normal_active   = assets_path .. "maximaze.svg"
+theme.titlebar_maximized_button_focus_active    = assets_path .. "maximaze.svg"
 
-theme.titlebar_floating_button_normal_inactive = themes_path .. "default/titlebar/floating_normal_inactive.png"
-theme.titlebar_floating_button_focus_inactive  = themes_path .. "default/titlebar/floating_focus_inactive.png"
-theme.titlebar_floating_button_normal_active   = themes_path .. "default/titlebar/floating_normal_active.png"
-theme.titlebar_floating_button_focus_active    = themes_path .. "default/titlebar/floating_focus_active.png"
+-- theme.titlebar_ontop_button_normal_inactive = themes_path .. "default/titlebar/ontop_normal_inactive.png"
+-- theme.titlebar_ontop_button_focus_inactive  = themes_path .. "default/titlebar/ontop_focus_inactive.png"
+-- theme.titlebar_ontop_button_normal_active   = themes_path .. "default/titlebar/ontop_normal_active.png"
+-- theme.titlebar_ontop_button_focus_active    = themes_path .. "default/titlebar/ontop_focus_active.png"
+-- theme.titlebar_floating_button_normal_inactive = themes_path .. "default/titlebar/floating_normal_inactive.png"
+-- theme.titlebar_floating_button_focus_inactive  = themes_path .. "default/titlebar/floating_focus_inactive.png"
+-- theme.titlebar_floating_button_normal_active   = themes_path .. "default/titlebar/floating_normal_active.png"
+-- theme.titlebar_floating_button_focus_active    = themes_path .. "default/titlebar/floating_focus_active.png"
 
-theme.titlebar_maximized_button_normal_inactive = themes_path .. "default/titlebar/maximized_normal_inactive.png"
-theme.titlebar_maximized_button_focus_inactive  = themes_path .. "default/titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_active   = themes_path .. "default/titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_active    = themes_path .. "default/titlebar/maximized_focus_active.png"
-
-theme.wallpaper = themes_path .. "default/background.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh      = themes_path .. "default/layouts/fairhw.png"

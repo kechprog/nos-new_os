@@ -1,6 +1,6 @@
 #!/bin/sh
 
-xinput set-prop 11 304 1
-xinput set-prop 11 283 1
-xinput set-prop 11 301 10
-xinput set-prop 11 292 0.02
+xinput set-prop 11 305 1
+xinput set-prop 11 284 1
+xinput set-prop 11 302 10
+xinput set-prop 11 293 0.02

@@ -30,41 +30,40 @@ client.connect_signal("request::titlebars", function(c)
     end)
   )
 
-  local padding = 0
-  local separator = wibox.widget.textbox("  ")
-  separator.force_height = 0
+  local padding = 3
+  local spacing = 7
 
   awful.titlebar(c, {
     position = "left",
-    size     = 22,
+    size     = 26,
   }):setup {
     { -- TOP
-      separator,
-      awful.titlebar.widget.closebutton(c),
-      separator,
-      awful.titlebar.widget.minimizebutton(c),
-      separator,
-      awful.titlebar.widget.maximizedbutton(c),
-      separator,
-      align = "top",
-      -- buttons = buttons,
-      layout  = wibox.layout.fixed.vertical,
-      spacing = padding,
+      wibox.container.margin(
+        awful.titlebar.widget.closebutton(c),
+        padding, padding, spacing + 4, spacing / 2),
+      wibox.container.margin(
+        awful.titlebar.widget.minimizebutton(c),
+        padding, padding, spacing / 2, spacing / 2),
+      wibox.container.margin(
+        awful.titlebar.widget.maximizedbutton(c),
+        padding, padding, spacing / 2, spacing),
+
+      align  = "top",
+      layout = wibox.layout.fixed.vertical,
     },
 
     { -- MIDDLE
       buttons = buttons,
-      align = "center",
+      align   = "center",
       layout  = wibox.layout.flex.vertical
     },
 
     { -- BOTTOM
-      separator,
-      awful.titlebar.widget.stickybutton(c),
-      separator,
+      wibox.container.margin(
+        awful.titlebar.widget.stickybutton(c),
+        padding, padding, spacing, spacing+5),
       align = "bottom",
       layout = wibox.layout.fixed.vertical(),
-      spacing = padding,
     },
 
     -- GLOBAL
@@ -72,7 +71,7 @@ client.connect_signal("request::titlebars", function(c)
   }
 
   if awful.layout.get() == awful.layout.suit.tile then
-      awful.titlebar.hide(c)
+    awful.titlebar.hide(c, "left")
   end
 
 end)
