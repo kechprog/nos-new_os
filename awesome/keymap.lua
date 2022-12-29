@@ -1,12 +1,12 @@
-local gears = require("gears")
-local awful = require("awful")
-local menubar = require("menubar")
+local gears         = require("gears")
+local awful         = require("awful")
+local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
-local switcher = require("awesome-switcher")
+local switcher      = require("awesome-switcher")
 
 local TERMINAL = "kitty"
-local MODKEY = "Mod1"
-local BROWSER = "firefox"
+local MODKEY   = "Mod1"
+local BROWSER  = "firefox"
 
 local function focus(direction)
   return function()
@@ -31,18 +31,10 @@ local GLOBALKEYS = gears.table.join(
   end,
     { description = "alt tab", group = "awesome" }),
 
-  awful.key({ MODKEY, "Shift"}, "Tab", function()
+  awful.key({ MODKEY, "Shift" }, "Tab", function()
     switcher.switch(-1, "Mod1", "Alt_L", "Shift", "Tab")
   end,
     { description = "alt tab", group = "awesome" }),
-
-
-  -- TODO REMAP TO TRACKPAD GESTURES
-  -- awful.key({ MODKEY, }, "Left", awful.tag.viewprev,
-  --   { description = "view previous", group = "tag" }),
-
-  -- awful.key({ MODKEY, }, "Right", awful.tag.viewnext,
-  --   { description = "view next", group = "tag" }),
 
   awful.key({ MODKEY, }, "Escape", awful.tag.history.restore,
     { description = "go back", group = "tag" }),
@@ -61,8 +53,8 @@ local GLOBALKEYS = gears.table.join(
 
   awful.key({ MODKEY, }, "t", function()
     awful.layout.inc(1)
-    local screen_num = mouse.screen
-    for _, c in ipairs(client.get(screen_num)) do
+    local tag = client.focus and client.focus.first_tag or nil
+    for _, c in ipairs(tag:clients()) do
       if awful.layout.get() == awful.layout.suit.tile then
         awful.titlebar.hide(c, "left") -- god knows why it can't infer position
       else
