@@ -3,6 +3,7 @@ local awful         = require("awful")
 local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local switcher      = require("awesome-switcher")
+local func_keys     = require("func_keys")
 
 local TERMINAL = "kitty"
 local MODKEY   = "Mod1"
@@ -51,9 +52,17 @@ local GLOBALKEYS = gears.table.join(
   awful.key({ MODKEY }, "h", focus("left"), -- some wierd shit
     { description = "focus right", group = "awesome" }),
 
+  awful.key({ MODKEY }, "i", function()
+    func_keys.vol_up()
+  end,
+    { description = "focus right", group = "awesome" }),
+
   awful.key({ MODKEY, }, "t", function()
     awful.layout.inc(1)
     local tag = client.focus and client.focus.first_tag or nil
+    if tag == nil then
+      return
+    end
     for _, c in ipairs(tag:clients()) do
       if awful.layout.get() == awful.layout.suit.tile then
         awful.titlebar.hide(c, "left") -- god knows why it can't infer position
